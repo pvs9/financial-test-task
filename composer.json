@@ -1,0 +1,41 @@
+{
+    "name": "test-task/finance",
+    "description": "Business logic library for financial operations app",
+    "type": "library",
+    "require": {
+        "php": "^8.1",
+        "beberlei/assert": "dev-master"
+    },
+    "require-dev": {
+        "phpspec/prophecy-phpunit": "^2.0",
+        "symfony/dependency-injection": "^5.2",
+        "symfony/config": "^5.2",
+        "codeception/verify": "^2.1",
+        "squizlabs/php_codesniffer": "^3.6",
+        "phpunit/phpunit": "^9.6",
+        "phpstan/phpstan": "^1.9"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "quality": [
+            "@phpcs",
+            "@stan"
+        ],
+        "stan": "vendor/bin/phpstan analyse src",
+        "phpcs": "vendor/bin/phpcs --standard=PSR12 src",
+        "test": "phpunit --colors=always",
+        "test-coverage": "phpunit --colors=always --coverage-text",
+        "test-nc": "phpunit -v --stop-on-error --colors=always"
+    },
+    "autoload": {
+        "psr-4": {
+            "Finance\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\Finance\\": "tests"
+        }
+    }
+}
