@@ -30,7 +30,7 @@ class NativeEntitySorter implements EntitySorter
     private function getPropertyMethod(string $property): string
     {
         return sprintf(
-            'get%s()',
+            'get%s',
             mb_strtoupper(
                 mb_substr($property, 0, 1, 'UTF-8'),
                 'UTF-8'
@@ -49,10 +49,10 @@ class NativeEntitySorter implements EntitySorter
         string $propertyMethod,
         bool $isDesc = false
     ): array {
-        $sort = static fn($a, $b) => $a->$propertyMethod <=> $b->$propertyMethod;
+        $sort = static fn($a, $b) => $a->{$propertyMethod}() <=> $b->{$propertyMethod}();
 
         if ($isDesc) {
-            $sort = static fn($a, $b) => $b->$propertyMethod <=> $a->$propertyMethod;
+            $sort = static fn($a, $b) => $b->{$propertyMethod}() <=> $a->{$propertyMethod}();
         }
 
         usort($entities, $sort);
@@ -71,10 +71,10 @@ class NativeEntitySorter implements EntitySorter
         string $propertyMethod,
         bool $isDesc = false
     ): array {
-        $sort = static fn($a, $b) => strcmp($a->$propertyMethod, $b->$propertyMethod);
+        $sort = static fn($a, $b) => strcmp($a->{$propertyMethod}(), $b->{$propertyMethod}());
 
         if ($isDesc) {
-            $sort = static fn($a, $b) => strcmp($b->$propertyMethod, $a->$propertyMethod);
+            $sort = static fn($a, $b) => strcmp($b->{$propertyMethod}(), $a->{$propertyMethod}());
         }
 
         usort($entities, $sort);
