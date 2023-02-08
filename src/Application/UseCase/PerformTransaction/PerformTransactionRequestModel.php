@@ -16,7 +16,14 @@ class PerformTransactionRequestModel
         private float $amount,
         private ?int $recipientId = null
     ) {
-        Assertion::inArray($type, TransactionType::cases());
+        Assertion::inArray(
+            $type,
+            [
+                TransactionType::DEPOSIT->value,
+                TransactionType::TRANSFER->value,
+                TransactionType::WITHDRAWAL->value,
+            ]
+        );
     }
 
     public function getAccountId(): int

@@ -10,7 +10,7 @@ class GetAccountTransactionsSortedRequestModel
 {
     public function __construct(
         private int $accountId,
-        private string $sortBy = 'id',
+        private string $sortBy = 'comment',
         private string $sortDirection = 'asc',
         private ?int $sortMode = SORT_REGULAR
     ) {
